@@ -1,0 +1,11 @@
+"id","name","email","password","role","avatar","p_create","p_edit","p_view","p_copy","p_delete","created_at","is_deleted","is_active","organization_id"
+"b1a972a6-595e-11eb-a851-853331335579","Panda Po","po@demo.com","123456","2",,"f","f","f","f","f","17/1/2021 23:28:00.697878-08:08","f","t",
+"15716834-595f-11eb-a851-853331335579","Zira","zira@demo.com","123456","1",,"f","f","f","f","f","17/1/2021 23:30:48.123163-08:08","t","t",
+"f683408c-595e-11eb-a851-853331335579","Lucifer","lucifer@demo.com","123456","1",,"f","f","f","f","f","17/1/2021 23:29:56.221101-08:08","f","t","5"
+"a4eb8628-50c9-11eb-a07c-bf277141b12d","Super Oasis","trmlucifer2020@gmail.com","123456","0",,"t","t","t","t","t","17/1/2021 12:23:53.920941-08:08","f","f",
+"095ff2de-50ce-11eb-a07c-bf277141b12d","Mohamed Omer","uaenic@gmail.com","Mm@3062011","0",,"t","t","t","t","t","17/1/2021 12:23:53.920941-08:08","f","t","4"
+"81aa5336-595e-11eb-a851-853331335579","Oogway","oogway@demo.com","123456","1",,"t","t","t","t","t","17/1/2021 23:26:39.535557-08:08","f","t",
+"d0c52e40-91ef-11eb-ac93-271d9b62dc35","spring","spring@gmail.com","Password123!","1",,"f","f","f","f","f","31/3/2021 00:07:54.906274-07:07","f","t",
+"0c400de2-ca84-11eb-b81a-e12587bcd1e3","Vu dung ","Vuvandung0519@outlook.com","tarademo","0",,"f","f","f","f","f","11/6/2021 00:10:05.284277-07:07","f","t",
+"b7cc255c-cce5-11eb-9af6-57c5fbd5364a","Emilija","emilijak19960501@gmail.com","tarademo","1",,"f","f","f","f","f","14/6/2021 00:54:16.748531-07:07","f","t",
+"29b8bd26-d45f-11eb-bd7f-939924da58e8","eee2222","abc@outlook.com","Tarademo123@","3",,"f","f","f","f","f","23/6/2021 13:11:15.122208-07:07","f","t",

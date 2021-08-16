@@ -242,24 +242,8 @@ const updateEmailLinkProc = (req, res, next) => {
   if (req.body.mode && req.body.mode == "sms") {
     updateEmailLink(emaillink_id, name, email_content, sender_name, sender_email, close_quota, close_date)
       .then(emailLink => {
-        if (emailLink) {
-          const contactRows = [];
-          for (let i = 0; i < contact_members.length; i++) {
-            contactRows.push([emailLink.link_id, contact_members[i].email_address, contact_members[i].first_name,
-            contact_members[i].last_name]);
-          }
-          createEmailLinkContacts(contactRows)
-            .then(linked_members => {
-              res.status(200).json(emailLink);
-            })
-            .catch(err => {
-              console.log(err);
-              res.status(500).json({
-                code: "emaillink-contacts/create-error",
-                message: "It couldn't update the email link.",
-              });
-            });
-
+        if (emailLink) {          
+          res.status(200).json(emailLink);
         } else {
           res.status(500).json({
             code: "emaillink/update-filter-error",
