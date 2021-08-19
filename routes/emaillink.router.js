@@ -234,12 +234,13 @@ const updateEmailLinkProc = (req, res, next) => {
     sender_email,
     close_quota,
     close_date,
-    contact_members
+    contact_members,
+    mode
   } = req.body;
 
   close_quota = close_quota.length ? close_quota : null;
   close_date = close_date.length ? close_date : null;
-  if (req.body.mode && req.body.mode == "sms") {
+  if (mode == "sms" || mode == "facebook" || mode == "twitter" || mode == "email") {
     updateEmailLink(emaillink_id, name, email_content, sender_name, sender_email, close_quota, close_date)
       .then(emailLink => {
         if (emailLink) {          
@@ -312,7 +313,6 @@ const sendEmailProc = (req, res, next) => {
     .then(link => {
       if (link) {
         if (email) {
-          if (link.contacts_file == 'sms')
           getEmailLinkContactByLinkIdAndEmail(link.link_id, email)
             .then(async contact => {
               const email_address = contact.email_address;

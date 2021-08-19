@@ -122,6 +122,22 @@ const getSurveyDatesByCreator = async (user_id) => {
     return [];
 }
 
+const getSurveyDates = async () => {
+  const results = await pool.query(`
+    SELECT
+      created_at
+    FROM 
+      surveys
+    ORDER BY
+      id DESC
+  `);
+
+  if (results.rows && results.rows.length > 0)
+    return results.rows.map(row => row.created_at.toString());
+  else
+    return [];
+}
+
 const updateSurvey = async (survey_id, json) => {
   const results = await pool.query(`
     UPDATE surveys SET json = $1 WHERE id = $2 RETURNING *
@@ -197,4 +213,5 @@ module.exports = {
   shareSurvey,
   activeSurvey,
   setMutliResponsesSurvey,
+  getSurveyDates
 };
