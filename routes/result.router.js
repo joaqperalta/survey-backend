@@ -11,7 +11,8 @@ var {
   getResultById, 
   postManualResult,
   getIsMultiple,
-  getResponseCount
+  getResponseCount,
+  deleteResult
 } = require('../database/results');
 const { verify } = require('../core/verify-token');
 var router = express.Router();
@@ -264,6 +265,30 @@ async function pdf(uri, req) {
   await browser.close();
   return filename;
 }
+
+const deleteResultProc = (req, res, next) => {
+  const result_id = req.params.id;
+
+  deleteResult(result_id)
+    .then(result => {
+      if (result) {
+        res.json({id: result_id});
+      } else {  
+        res.status(500).send({
+          code: "result/not-found-id",
+          message: "It couldn't delete the result.",
+        });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send({
+        code: "result/delete-error",
+        message: "It couldn't delete the result.",
+      });
+    })
+};
+
 const pdfExport =async (req, res, next) => {
     const token=verify(req);
     const filename = await pdf('', req);
@@ -277,5 +302,6 @@ router.get('/:id', getResultByIdProc);
 router.get('/', getResultProc);
 router.post('/', postResultProc);
 router.put('/', updateResultProc);
-router.post('/pdfff',pdfExport)
+router.post('/pdfff',pdfExport);
+router.delete('/:id', deleteResultProc);
 module.exports = router;

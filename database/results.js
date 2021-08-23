@@ -278,6 +278,18 @@ const getResponseCount = async (survey_id, weblink_link_id) => {
     return [];
   }
 }
+
+const deleteResult = async (id) => {
+  const results = await pool.query(`
+      DELETE FROM results WHERE id=$1
+  `, [id])
+  if (results.rows && results.rows.length > 0) {
+    return results.rows
+  } else {
+    return []
+  }
+}
+
 module.exports = {
   getResultsBySurvey,
   getResultDatesBySurvey,
@@ -293,5 +305,6 @@ module.exports = {
   getIsMultiple,
   getResponseCount,
   getResultDates,
-  getCompletedResponses
+  getCompletedResponses,
+  deleteResult
 };
