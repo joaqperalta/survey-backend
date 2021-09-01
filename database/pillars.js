@@ -9,14 +9,26 @@ const createPillar = async (name) => {
 }
 
 const getPillars = async () => {
-  const results = await pool.query("SELECT * FROM pillars ORDER BY created_at DESC", []);
+  const results = await pool.query("SELECT * FROM pillars WHERE is_deleted=false ORDER BY created_at DESC", []);
   if (results.rows)
     return results.rows;
   else
     return [];
 }
+const updatePillarById = async (pillar_id, name) => {
+	let	results = await pool.query(`UPDATE pillars SET name=$2 WHERE id=$1 RETURNING *`,
+			[pillar_id, name]);
+	return (results.rows && results.rows.length > 0) ? results.rows[0] : null;
+}
 
+const deletePillars = async (ids) => {
+	const results = await pool.query('UPDATE pillars SET is_deleted=true WHERE id = ANY($1::uuid[]) RETURNING id', [ids]);
+
+	return (results.rows && results.rows.length > 0) ? results.rows : [];
+}
 module.exports = {
   createPillar,
   getPillars,
+  updatePillarById,
+  deletePillars,
 };
