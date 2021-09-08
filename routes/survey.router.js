@@ -10,7 +10,8 @@ var {
   shareSurvey,
   activeSurvey,
   setMutliResponsesSurvey,
-  getAllSurveys } = require('../database/surveys');
+  getAllSurveys,
+  updateStyleBySurveyId } = require('../database/surveys');
 var { copyResultsBySurvey, getResultDatesBySurvey } = require('../database/results');
 const { getWebLinkByLinkId } = require('../database/weblinks');
 const { getEmailLinkByLinkId } = require('../database/emaillinks');
@@ -389,6 +390,22 @@ const setMultiResponsesSurveyProc = (req, res, next) => {
     })
 }
 
+const updateStyleSurveyProc = (req, res, next) => {
+ console.log(req.body)
+ const { id, tColor, fontSize } = req.body;
+ updateStyleBySurveyId(id, tColor, fontSize)
+   .then(survey => {
+     res.status(200).json(survey)
+   })
+   .catch(err => {
+     console.log(err);
+     res.status(500).json({
+       code: "survey/update-style-error",
+       message: "It couldn't update style of survey."
+     })
+   })
+}
+
 router.post('/copy', copySurveysProc);
 router.get('/shared', getSharedSurveyListProc);
 router.get('/w/share', getSurveyByWebLinkProc);
@@ -402,6 +419,7 @@ router.put('/:id', updateSurveyProc);
 router.get('/', getMySurveyListProc);
 router.post('/', addSurveyProc);
 router.delete('/', deleteSurveysProc);
+router.post('/style', updateStyleSurveyProc);
 
 
 module.exports = router;

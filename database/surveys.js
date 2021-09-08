@@ -200,6 +200,16 @@ const setMutliResponsesSurvey = async (survey_id) => {
     return null;
 }
 
+const updateStyleBySurveyId = async (survey_id, tColor, fontSize) => {
+  const results = await pool.query(`
+    UPDATE surveys SET font_size=$2, color=$3 WHERE id=$1  RETURNING *
+  `,[survey_id, fontSize, tColor]);
+  if (results.rows && results.rows.length > 0)
+    return results.rows[0];
+  else
+    return null;
+}
+// UPDATE users SET name=$2, email=$3, role=$4, organization_id=$5 WHERE id=$1 RETURNING *`
 module.exports = {
   createSurvey,
   getAllSurveys,
@@ -213,5 +223,6 @@ module.exports = {
   shareSurvey,
   activeSurvey,
   setMutliResponsesSurvey,
-  getSurveyDates
+  getSurveyDates,
+  updateStyleBySurveyId
 };
